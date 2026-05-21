@@ -185,7 +185,7 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1016,2361" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1016,2503" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd2:DataTable" Name="dtExtraida" />
       <Variable x:TypeArguments="x:String" Name="caminhoExcel" />
@@ -216,7 +216,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:BuildDataTable>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="484,1006" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="484,973" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
         <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Chrome Memória Ram Ddr4  Mercado Livre" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="452,611" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="9cf80d6c-93fd-43bd-b0d9-bb308a2c9a41" Version="V2">
           <uix:NApplicationCard.Body>
@@ -278,7 +278,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="452,174" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence DisplayName="Catch - Exception" sap:VirtualizedContainerService.HintSize="452,174" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -300,19 +300,20 @@
         </Sequence>
       </TryCatch.Finally>
     </TryCatch>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtExtraida]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="484,485" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtExtraida]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="484,660" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd2:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd2:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,303" sap2010:WorkflowViewState.IdRef="Sequence_18">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,478" sap2010:WorkflowViewState.IdRef="Sequence_18">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Regras para os objetos obtidos" ArrayRow="[New Object(){&#xD;&#xA;    CurrentRow(&quot;Nome&quot;).ToString,&#xD;&#xA;    If(System.Text.RegularExpressions.Regex.Matches(System.Text.RegularExpressions.Regex.Replace(CurrentRow(&quot;Preco&quot;).ToString.Replace(&quot;.&quot;, &quot;&quot;), &quot;\d+%\s*OFF&quot;, &quot;&quot;), &quot;(?&lt;=R\$\s?)\d+(\s\d{2})?&quot;).Count &gt; 0, CDbl(System.Text.RegularExpressions.Regex.Matches(System.Text.RegularExpressions.Regex.Replace(CurrentRow(&quot;Preco&quot;).ToString.Replace(&quot;.&quot;, &quot;&quot;), &quot;\d+%\s*OFF&quot;, &quot;&quot;), &quot;(?&lt;=R\$\s?)\d+(\s\d{2})?&quot;).Cast(Of System.Text.RegularExpressions.Match)().Last().Value.Replace(&quot; &quot;, &quot;.&quot;)), 0.0),&#xD;&#xA;    If(CurrentRow(&quot;Frete_Texto&quot;).ToString.ToLower.Contains(&quot;grátis&quot;), 0.0, If(System.Text.RegularExpressions.Regex.IsMatch(CurrentRow(&quot;Frete_Texto&quot;).ToString, &quot;\d+&quot;), CDbl(System.Text.RegularExpressions.Regex.Match(CurrentRow(&quot;Frete_Texto&quot;).ToString.Replace(&quot;.&quot;, &quot;&quot;).Replace(&quot; &quot;, &quot;,&quot;), &quot;\d+(,\d{2})?&quot;).Value.Replace(&quot;,&quot;, &quot;.&quot;)), 0.0)),&#xD;&#xA;    (CurrentRow(&quot;Frete_Texto&quot;).ToString.ToLower.Contains(&quot;full&quot;) OrElse CurrentRow(&quot;Nome&quot;).ToString.ToLower.Contains(&quot;full&quot;) OrElse If(dtExtraida.Columns.Contains(&quot;Full_Info&quot;), CurrentRow(&quot;Full_Info&quot;).ToString.ToLower.Contains(&quot;enviado&quot;), False)),&#xD;&#xA;    CurrentRow(&quot;URL&quot;).ToString&#xD;&#xA;}]" DataTable="[dtProdutoFinal]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,243" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;[PRECO RAW] &quot; + CurrentRow(&quot;Nome&quot;).ToString + &quot; =&gt; [&quot; + CurrentRow(&quot;Preco&quot;).ToString + &quot;]&quot;]" />
+            <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Regras para os objetos obtidos" ArrayRow="[New Object(){CurrentRow(&quot;Nome&quot;).ToString, If(String.IsNullOrWhiteSpace(CurrentRow(&quot;Preco&quot;).ToString) OrElse Not System.Text.RegularExpressions.Regex.IsMatch(CurrentRow(&quot;Preco&quot;).ToString, &quot;\d&quot;), 0.0, CDbl(System.Text.RegularExpressions.Regex.Match(System.Text.RegularExpressions.Regex.Replace(CurrentRow(&quot;Preco&quot;).ToString.Replace(&quot;.&quot;, &quot;&quot;).Replace(&quot;,&quot;, &quot;.&quot;), &quot;\d+\s*%\s*OFF&quot;, &quot;&quot;), &quot;(?&lt;=R\$\s*)\d+(?:\.\d{1,2})?&quot;).Value.Replace(&quot; &quot;, &quot;&quot;))), If(CurrentRow(&quot;Frete_Texto&quot;).ToString.ToLower.Contains(&quot;grátis&quot;), 0.0, If(System.Text.RegularExpressions.Regex.IsMatch(CurrentRow(&quot;Frete_Texto&quot;).ToString, &quot;\d+&quot;), CDbl(System.Text.RegularExpressions.Regex.Match(CurrentRow(&quot;Frete_Texto&quot;).ToString.Replace(&quot;.&quot;, &quot;&quot;).Replace(&quot; &quot;, &quot;,&quot;), &quot;\d+(,\d{2})?&quot;).Value.Replace(&quot;,&quot;, &quot;.&quot;)), 0.0)), (CurrentRow(&quot;Frete_Texto&quot;).ToString.ToLower.Contains(&quot;full&quot;) OrElse CurrentRow(&quot;Nome&quot;).ToString.ToLower.Contains(&quot;full&quot;) OrElse If(dtExtraida.Columns.Contains(&quot;Full_Info&quot;), CurrentRow(&quot;Full_Info&quot;).ToString.ToLower.Contains(&quot;enviado&quot;), False)), CurrentRow(&quot;URL&quot;).ToString}]" DataTable="[dtProdutoFinal]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="416,243" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
